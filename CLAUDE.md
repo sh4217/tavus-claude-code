@@ -5,23 +5,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-# Run both frontend and backend together
-npm run dev:all
-
-# Run frontend only (Vite dev server on port 5173)
+# Run both frontend and backend
 npm run dev
 
-# Run backend only (Express server on port 3001)
-npm run server
+# Frontend only (from app/)
+npm run dev --prefix app
 
-# Build for production
-npm run build
+# Backend only
+npx tsx server/index.ts
 
-# Lint
-npm run lint
+# Build/lint (from app/)
+npm run build --prefix app
+npm run lint --prefix app
 ```
-
-All commands run from `my-tavus-app/`.
 
 ## Architecture
 
@@ -35,16 +31,16 @@ User speaks → Tavus AI → tool_call event → useToolCalls hook
 ```
 
 **Key files:**
-- `src/hooks/use-tool-calls.ts` - Listens for `conversation.tool_call` events from Daily, calls backend, sends results back via `conversation.echo`
-- `server/claude-runner.ts` - Spawns Claude Code CLI with `execSync`, 5-minute timeout, runs in `/Users/seanhall/vault`
+- `app/src/hooks/use-tool-calls.ts` - Listens for `conversation.tool_call` events from Daily, calls backend, sends results back via `conversation.echo`
+- `app/src/components/cvi/` - Auto-generated Tavus CVI components (use `npx @tavus/cvi-ui@latest` to manage)
 - `server/index.ts` - Express server exposing `POST /api/claude`
-- `src/components/cvi/` - Auto-generated Tavus CVI components (use `npx @tavus/cvi-ui@latest` to manage)
+- `server/claude-runner.ts` - Spawns Claude Code CLI with `execSync`, 5-minute timeout, runs in `/Users/seanhall/vault`
 
 **State management:** Jotai atoms in CVI hooks, React useState in App.tsx
 
 ## Environment Variables
 
-Required in `.env`:
+Required in `app/.env`:
 ```
 VITE_TAVUS_API_KEY=your_api_key
 VITE_REPLICA_ID=your_replica_id

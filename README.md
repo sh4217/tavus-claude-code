@@ -20,26 +20,27 @@ User speaks → Tavus AI decides to call tool → Frontend receives tool_call ev
 ## Project Structure
 
 ```
-my-tavus-app/
-├── src/
-│   ├── App.tsx                 # Main app - creates conversation, renders UI
-│   ├── hooks/
-│   │   └── use-tool-calls.ts   # Listens for tool calls, calls backend, sends results
-│   └── components/cvi/         # Tavus CVI components (auto-generated)
-├── server/
+├── app/                        # Frontend (Vite + React)
+│   ├── src/
+│   │   ├── App.tsx             # Main app - creates conversation, renders UI
+│   │   ├── hooks/
+│   │   │   └── use-tool-calls.ts   # Listens for tool calls, calls backend, sends results
+│   │   └── components/cvi/     # Tavus CVI components (auto-generated)
+│   └── .env                    # API keys and config
+├── server/                     # Backend (Express)
 │   ├── index.ts                # Express server on port 3001
 │   └── claude-runner.ts        # Spawns Claude Code CLI subprocess
-└── .env                        # API keys and config
+└── README.md
 ```
 
 ## Setup
 
 1. Install dependencies:
    ```bash
-   npm install
+   npm install && npm install --prefix app
    ```
 
-2. Configure `.env`:
+2. Configure `app/.env`:
    ```
    VITE_TAVUS_API_KEY=your_api_key
    VITE_REPLICA_ID=your_replica_id
@@ -50,19 +51,11 @@ my-tavus-app/
 
 ## Running
 
-Start both frontend and backend:
 ```bash
-npm run dev:all
-```
-
-Or separately:
-```bash
-# Terminal 1 - Frontend (port 5173)
 npm run dev
-
-# Terminal 2 - Backend (port 3001)
-npm run server
 ```
+
+This starts both frontend (port 5173) and backend (port 3001).
 
 ## Usage
 

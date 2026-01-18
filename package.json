@@ -1,0 +1,17 @@
+{
+  "name": "tavus-claude-code",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix app\" \"npx tsx server/index.ts\""
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "concurrently": "^9.2.1",
+    "tsx": "^4.21.0"
+  }
+}
