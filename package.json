@@ -2,7 +2,8 @@
   "name": "tavus-claude-code",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix app\" \"npx tsx server/index.ts\""
+    "dev": "concurrently \"npm run dev --prefix app\" \"npx tsx server/index.ts\"",
+    "dev:audio": "concurrently \"VITE_AUDIO_ONLY=true npm run dev --prefix app\" \"npx tsx server/index.ts\""
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -11,6 +11,7 @@ export const useCVICall = (): {
 		({ url }: { url: string }) => {
 			daily?.join({
 				url: url,
+				startVideoOff: import.meta.env.VITE_AUDIO_ONLY === "true",
 				inputSettings: {
 					audio: {
 						processor: {

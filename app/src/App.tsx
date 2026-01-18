@@ -15,6 +15,7 @@ function App() {
       body: JSON.stringify({
         replica_id: import.meta.env.VITE_REPLICA_ID || "rfe12d8b9597",
         persona_id: import.meta.env.VITE_PERSONA_ID || "pdced222244b",
+        ...(import.meta.env.VITE_AUDIO_ONLY === "true" && { audio_only: true }),
       }),
     });
 
@@ -39,7 +40,12 @@ function App() {
           padding: 0,
         }}
       >
-        <h1 style={{ marginBottom: "1rem" }}>Tavus CVI Integration</h1>
+        <h1 style={{ marginBottom: "1rem" }}>
+          Tavus CVI Integration
+          {import.meta.env.VITE_AUDIO_ONLY === "true" && (
+            <span style={{ fontSize: "0.5em", marginLeft: "0.5rem", opacity: 0.7 }}>(Audio Only)</span>
+          )}
+        </h1>
         {!conversationUrl ? (
           <button
             onClick={createConversation}
